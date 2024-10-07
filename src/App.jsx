@@ -3,9 +3,11 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Login from "./Login";
+import Dashboard from "./dashboard/Dashboard";
+import AddPost from "./dashboard/AddPost";
+import ListPost from "./dashboard/ListPost";
 
 function App() {
-  const [count, setCount] = useState(0);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -30,10 +32,28 @@ function App() {
         },
       ],
     },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
+      children: [
+        {
+          index: true,
+          element: <h1> تست پروفایل</h1>,
+        },
+        {
+          path: "add_post",
+          element: <AddPost />,
+        },
+        {
+          path: "post_list",
+          element: <ListPost />,
+        },
+      ],
+    },
   ]);
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}></RouterProvider>
     </>
   );
 }
